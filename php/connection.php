@@ -10,10 +10,6 @@ $conexion = new mysqli($server, $user, $pass, $db);
 if($conexion -> connect_error){
     die("Error en la conexion". $conexion -> connect_error);
 }
-else{
-    echo "conectado";
-}
 
 
 
-?>

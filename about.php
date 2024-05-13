@@ -16,12 +16,12 @@
     <nav id="navbar">
     <nav id="navbar" class="py-30">
       <div class="container">
-        <h1 class="logo"><a href="index.html">Hotel Las Estrellas</a></h1>
+        <h1 class="logo"><a href="index.php">Hotel Las Estrellas</a></h1>
         <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a class="current" href="about.html">Acerda de</a></li>
+          <li><a href="index.php">Home</a></li>
+          <li><a class="current" href="about.php">Acerda de</a></li>
           <!-- <li><a href="about.html" class="current">About</a></li> -->
-          <li><a href="contact.html">Reservar</a></li>
+          <li><a href="contact.php">Reservar</a></li>
         </ul>
       </div>
     </nav>
@@ -32,7 +32,7 @@
     <div class="container">
       <div class="about-text">
       <div class="about-content">
-        <h1>About Hotel Las Estrellas</h1>
+        <h1>Aceca de nosotros</h1>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Non doloribus rerum dolor maiores provident, perferendis in, ea deserunt placeat dignissimos, fugiat aliquid! Pariatur, magnam. Illum laudantium in veritatis unde assumenda nemo iure ex et error. Tempora voluptatum hic dolorum non voluptatibus repudiandae pariatur porro doloribus eveniet. Alias recusandae quis aliquam.</p>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti debitis praesentium dolores reiciendis quas sed ratione voluptatibus assumenda quibusdam harum.</p>
         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam eveniet at explicabo repellat reprehenderit, laboriosam voluptatem nemo voluptatibus neque? Omnis illo minus facere corporis laborum itaque earum hic assumenda, suscipit nihil veniam rem pariatur, eos in quidem reprehenderit ea vitae non. Recusandae provident nihil eos facilis beatae placeat quis molestiae.</p>

@@ -1,3 +1,10 @@
+<?php
+  session_start();
+  $_SESSION;
+  include('php/connection.php');
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,9 +14,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <link href="css/style.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-  <?
-      include('php/login.php');
-  ?>
   <title>Hotel las Estrellas | Welcome</title>
 </head>
 
@@ -19,10 +23,10 @@
       <div class="container">
         <h1 class="logo"><a href="index.html">Hotel las Estrellas</a></h1>
         <ul>
-          <li><a href="index.html" class="current">Home</a></li>
-          <li><a href="about.html">Acerca de</a></li>
-          <li><a href="contact.html">Reservar</a></li>
-          <li><a href="login.html"><img src = "img/loginIcon.png" class="login_Icon"></a></li>
+          <li><a href="index.php" class="current">Home</a></li>
+          <li><a href="about.php">Acerca de</a></li>
+          <li><a href="contact.php">Reservar</a></li>
+          <li><a href="login.php"><img src = "img/loginIcon.png" class="login_Icon"></a></li>
         </ul>
       </div>
     </nav>
