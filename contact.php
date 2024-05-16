@@ -3,6 +3,40 @@ session_start();
 include("php/connection.php");
 include("php/functions.php");
 $user_data = check_login($conexion);
+if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['reservar'])) {
+  $noHabitaciones = $_POST['habitaciones'];
+  $tipo_Habitacion = $_POST['tipo_habitacion'];
+  $numPersonas = $_POST['numPersonas'];
+  $check_in = $_POST['check_in'];
+  $check_out = $_POST['check_out'];
+  $id = $user_data['id'];
+
+
+  $reservationData = [
+    'noHabitaciones' => $noHabitaciones,
+    'tipo_Habitacion' => $tipo_Habitacion,
+    'numPersonas' => $numPersonas,
+    'check_in' => $check_in,
+    'check_out' => $check_out,
+    'id' => $id
+  ];
+
+  $_SESSION['reservation'] = $reservationData;
+
+
+  //echo '<pre>'; print_r($reservationData); echo '</pre>';
+
+
+
+  $query = "INSERT INTO `user_reservation`(`reservation_numRooms`, `reservation_typeRoom`, 
+  `reservation_numPeople`, `reservation_checkIn`, `reservation_checkOut`, `user_id`) 
+  VALUES ('$noHabitaciones','$tipo_Habitacion','$numPersonas','$check_in','$check_out','$id')";
+
+  header("Location: php/generarPDF.php");
+  die;
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -12,7 +46,7 @@ $user_data = check_login($conexion);
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style/style.css">
+  <link rel="stylesheet" href="css/mobile.css">
   <link rel="stylesheet" media="screen and (max-width:768px)" href="style/mobile.css">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
@@ -21,6 +55,12 @@ $user_data = check_login($conexion);
 </head>
 
 <body>
+  <!-- Initialize the JS-SDK -->
+  <script
+      src="https://www.paypal.com/sdk/js?client-id=AYWm_0lUPf3o_EltZoOc25DRs9O1FdWj4wf7lDfp4yjeOeL0kpVJzs9_lqfXxmq--K8yRk4F_uTUcXO2&buyer- 
+      country=US&currency=USD&components=buttons&enable-funding=venmo"
+      data-sdk-integration-source="developer-studio"
+    ></script>
   <header>
     <nav id="navbar">
       <nav id="navbar" class="py-30">
@@ -44,10 +84,10 @@ $user_data = check_login($conexion);
   <section id="contact-form" class="py-3">
     <section id="contact" class="py-80">
       <div class="container">
-        <h1>Bienvenido <?php echo $user_data['user_name'];?></h1>
+        <h1>Bienvenido <?php echo $user_data['user_name']; ?></h1>
         <h2>Reservación</h2>
         <br><br>
-        <form action="#">
+        <form method="post">
           <!-- <div class="form-group">
           <label for="name">Nombre Completo</label>
           <input type="text" id="name" name="name" required>
@@ -58,11 +98,11 @@ $user_data = check_login($conexion);
         </div> -->
           <div class="form-group">
             <label for="rooms">Número de Habitaciones</label>
-            <input type="number" id="rooms" name="rooms" min="1" required>
+            <input type="number" id="rooms" name="habitaciones" min="1" required>
           </div>
           <div class="form-group">
             <label for="room-type">Tipo de Habitación</label>
-            <select id="room-type" name="room-type" required>
+            <select id="room-type" name="tipo_habitacion" required>
               <option value="sencilla">Sencilla</option>
               <option value="doble">Doble</option>
               <option value="deluxe">Deluxe</option>
@@ -71,18 +111,19 @@ $user_data = check_login($conexion);
           </div><br>
           <div class="form-group">
             <label for="guests">Cantidad de Personas</label>
-            <input type="number" id="guests" name="guests" min="1" required>
+            <input type="number" id="guests" name="numPersonas" min="1" required>
           </div>
           <div class="form-group">
             <label for="check-in-date">Fecha de Entrada</label>
-            <input type="date" id="check-in-date" name="check-in-date" required>
+            <input type="date" id="check-in-date" name="check_in" required>
           </div>
           <div class="form-group">
             <label for="check-out-date">Fecha de Salida</label>
-            <input type="date" id="check-out-date" name="check-out-date" required>
+            <input type="date" id="check-out-date" name="check_out" required>
           </div>
 
-          <button type="submit" class="btn btn-light">Reservar</button>
+          <button type="submit" class="btn btn-light" name="reservar">Reservar</button>
+          <div id="paypal-button-container"></div>        
         </form>
       </div>
     </section>
@@ -119,11 +160,11 @@ $user_data = check_login($conexion);
     <br>
     <section id="footer">
 
-      <p>Hotel Richi &copy; 2024, All Rights Reserved </p>
+      <p>Hotel Las Estrellas &copy; 2024, All Rights Reserved </p>
     </section>
 
     <footer id="mainfooter" class="py-30">
-      <p>&copy; 2024 Hotel Richi</p>
+      <p>&copy; 2024 Hotel Las Estrellas</p>
     </footer>
 
 </body>
