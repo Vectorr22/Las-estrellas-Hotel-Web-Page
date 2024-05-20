@@ -2,6 +2,12 @@
   session_start();
   $_SESSION;
   include('php/connection.php');
+  if(isset($_SESSION['user_type']))
+  {
+    $userType = $_SESSION['user_type'];
+  }
+  else
+    $userType = 'guest';
 ?>
 
 
@@ -21,12 +27,21 @@
   <header>
     <nav id="navbar" class="py-30">
       <div class="container">
-        <h1 class="logo"><a href="index.html">Hotel las Estrellas</a></h1>
+        <h1 class="logo"><a href="index.php">Hotel las Estrellas</a></h1>
         <ul>
           <li><a href="index.php" class="current">Home</a></li>
           <li><a href="about.php">Acerca de</a></li>
-          <li><a href="contact.php">Reservar</a></li>
-          <li><a href="login.php"><img src = "img/loginIcon.png" class="login_Icon"></a></li>
+          <?php if ($userType== 'admin') : ?>
+            <li><a href="adminCRUD.php">Modificaciones</a></li>
+          <?php else: ?>
+            <li><a href="contact.php">Reservar</a></li>
+          <?php endif; ?>
+
+          <?php if ($userType == 'guest'): ?>
+            <li><a href="login.php"><img src="img/loginIcon.png" class="login_Icon"></a></li>
+          <?php else: ?>
+            <li><a href="php/logout.php">Logout</a></li>
+          <?php endif; ?>
         </ul>
       </div>
     </nav>

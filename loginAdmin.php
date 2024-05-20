@@ -3,17 +3,17 @@ session_start();
 include("php/connection.php");
 include("php/functions.php");
 if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['login'])) {
-    $email = $_POST['user_email'];
-    $password = $_POST['user_password'];
-    if (!empty($email) && !empty($password)) {
-        $query = "SELECT * from user_data WHERE user_email = '$email' limit 1";
+    $user = $_POST['username'];
+    $password = $_POST['password'];
+    if (!empty($user) && !empty($password)) {
+        $query = "SELECT * from user_admin WHERE admin_username = '$user' limit 1";
         $result = mysqli_query($conexion, $query);
         if ($result && mysqli_num_rows($result) > 0) {
-            $user_data = mysqli_fetch_assoc($result);
-            if ($user_data['user_password'] === $password) {
-                $_SESSION['user_data'] = $user_data;
-                $_SESSION['user_type'] = "client";
-                header("Location: contact.php");
+            $admin_data = mysqli_fetch_assoc($result);
+            if ($admin_data['admin_password'] === $password) {
+                $_SESSION['admin_data'] = $admin_data;
+                $_SESSION['user_type'] = "admin";
+                header("Location: adminCRUD.php");
                 exit();
             }
         }
@@ -36,24 +36,21 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['login'])) {
 <body class="body_login">
     <container>
         <div class="login_container">
-            <h1>Iniciar Sesion</h1>
-            <div class="image_login">
-                <a href="loginAdmin.php"><img src="img/user.png" alt="login_image"></a>
-            </div>
+            <h1>Administrador</h1>
             <form method="post">
                 <div class="correo_login">
-                    <input type="text" required name="user_email">
-                    <label>Correo Electrónico</label>
+                    <input type="text" required name="username">
+                    <label>Username</label>
                 </div>
                 <div class="correo_login">
-                    <input type="text" required name="user_password">
+                    <input type="text" required name="password">
                     <label>Contraseña</label>
                 </div>
                 <div class="buton_login">
                     <input type="submit" value="Login" name="login">
                 </div>
                 <div class="registrar_login">
-                    ¿No tienes cuenta? <a href="register.php">Registrate</a>
+                    ¿Eres usuario normal? <a href="login.php">Logear</a>
                 </div>
             </form>
         </div>

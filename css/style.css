@@ -513,3 +513,36 @@ form .correo_login{
 }
 
 
+.crud_container {
+  background-color: #fda94f;
+  color: black;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap; /* Add this line */
+  align-items: center;
+  font-family: 'Roboto', sans-serif;
+  margin: 2rem;
+  border-radius: 1rem;
+  padding: 2rem;
+  width: 38rem;
+}
+
+.crud_container p {
+  text-align: center;
+  margin-right: 1rem;
+  font-size: 30px;
+  flex-grow: 7;
+}
+
+.crud_container img {
+  flex-grow: 3;
+}
+
+.divs_containers
+{
+  display: grid;
+  grid-template-rows: auto;
+  align-items: center;
+  justify-content: center;
+}
+

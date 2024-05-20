@@ -55,12 +55,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['reservar'])) {
 </head>
 
 <body>
-  <!-- Initialize the JS-SDK -->
-  <script
-      src="https://www.paypal.com/sdk/js?client-id=AYWm_0lUPf3o_EltZoOc25DRs9O1FdWj4wf7lDfp4yjeOeL0kpVJzs9_lqfXxmq--K8yRk4F_uTUcXO2&buyer- 
-      country=US&currency=USD&components=buttons&enable-funding=venmo"
-      data-sdk-integration-source="developer-studio"
-    ></script>
   <header>
     <nav id="navbar">
       <nav id="navbar" class="py-30">
@@ -123,7 +117,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['reservar'])) {
           </div>
 
           <button type="submit" class="btn btn-light" name="reservar">Reservar</button>
-          <div id="paypal-button-container"></div>        
         </form>
       </div>
     </section>
