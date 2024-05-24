@@ -17,7 +17,7 @@
             <div class="container">
                 <h1 class="logo"><a href="index.php">Hotel las Estrellas</a></h1>
                 <ul>
-                    <li><a href="php/logout.php">Logout</a></li>
+                    <li><a href="php/logout.php" style="color:blue;">Logout</a></li>
                 </ul>
             </div>
         </nav>
@@ -26,21 +26,21 @@
     <h1 style="text-align: center;">Bienvenido administrador</h1>
     <br><br>
     <div class="divs_containers">
-        <a href="#" class="crud_container">
+        <a href="altasAdmin.php" class="crud_container">
             <p>
                 Altas
             </p>
             <img src="img/insert-object-svgrepo-com.svg">
         </a>
 
-        <a href="#" class="crud_container">
+        <a href="bajasAdmin.php" class="crud_container">
             <p>
                 Bajas
             </p>
             <img src="img/delete-3-svgrepo-com.svg">
         </a>
 
-        <a href="#" class="crud_container">
+        <a href="cambiosAdmin.php" class="crud_container">
             <p>
                 Cambios
             </p>
@@ -49,7 +49,7 @@
     </div>
 
 
-
+    <br><br>
 
 
 

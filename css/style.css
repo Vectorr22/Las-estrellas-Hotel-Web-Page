@@ -518,13 +518,21 @@ form .correo_login{
   color: black;
   display: flex;
   justify-content: center;
-  flex-wrap: wrap; /* Add this line */
+  flex-wrap: wrap; 
   align-items: center;
   font-family: 'Roboto', sans-serif;
   margin: 2rem;
   border-radius: 1rem;
   padding: 2rem;
   width: 38rem;
+}
+
+.divs_containers
+{
+  display: grid;
+  grid-template-rows: auto;
+  align-items: center;
+  justify-content: center;
 }
 
 .crud_container p {
@@ -536,13 +544,21 @@ form .correo_login{
 
 .crud_container img {
   flex-grow: 3;
+  width: auto;
+  height: 3rem;
+  width: 3rem;
 }
 
-.divs_containers
+.crud_header
 {
-  display: grid;
-  grid-template-rows: auto;
-  align-items: center;
-  justify-content: center;
+  text-align: center;
 }
+
+.admin_altas
+{
+  max-width: 20rem;
+  margin: 0 auto;
+}
+
+
 
