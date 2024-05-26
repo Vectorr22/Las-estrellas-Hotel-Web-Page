@@ -12,10 +12,21 @@ body {
   color: #fff;
 }
 
-h1 {font-size: 2.441rem;}
-h2 {font-size: 1.953rem;}
-h3 {font-size: 1.563rem;}
-h4 {font-size: 1.25rem;}
+h1 {
+  font-size: 2.441rem;
+}
+
+h2 {
+  font-size: 1.953rem;
+}
+
+h3 {
+  font-size: 1.563rem;
+}
+
+h4 {
+  font-size: 1.25rem;
+}
 
 h1,
 h2,
@@ -73,9 +84,17 @@ hr {
   background: #737373;
 }
 
-.py-80 {padding: 80px 0;}
-.py-50 {padding: 50px 0;}
-.py-30 {padding: 30px 0;}
+.py-80 {
+  padding: 80px 0;
+}
+
+.py-50 {
+  padding: 50px 0;
+}
+
+.py-30 {
+  padding: 30px 0;
+}
 
 .box {
   float: left;
@@ -135,10 +154,10 @@ hr {
   padding: 190px 60px;
   height: 600px;
   text-align: center;
-  
+
 }
 
-.bloor_bg{
+.bloor_bg {
   z-index: 0;
   padding: 2rem;
   background-image: linear-gradient(rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.8));
@@ -147,7 +166,7 @@ hr {
 #showcase h1,
 #showcase p {
   padding-bottom: 20px;
-  
+
 }
 
 #showcase h1 {
@@ -180,12 +199,14 @@ hr {
   background-size: cover;
   background-position: center;
 }
+
 #features .features-2 {
   background: url('../img/feature-2.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
 }
+
 #features .features-3 {
   background: url('../img/feature-3.jpg');
   background-repeat: no-repeat;
@@ -228,7 +249,7 @@ hr {
   height: 450px;
 }
 
-#testimonial h2{
+#testimonial h2 {
   font-weight: lighter;
   padding-bottom: 20px;
 }
@@ -241,17 +262,21 @@ hr {
 }
 
 #mainfooter {
-  background-color: #fda94f; /* Color de fondo del pie de página */
-  color: #000; /* Color del texto del pie de página (negro) */
+  background-color: #fda94f;
+  /* Color de fondo del pie de página */
+  color: #000;
+  /* Color del texto del pie de página (negro) */
 }
 
 #footer {
-  background-color: #fda94f; /* Color de fondo del pie de página */
-  color: #000; /* Color del texto del pie de página (negro) */
+  background-color: #fda94f;
+  /* Color de fondo del pie de página */
+  color: #000;
+  /* Color del texto del pie de página (negro) */
 }
 
 
-.testimonial-content img{
+.testimonial-content img {
   float: left;
   height: 50px;
   border-radius: 50%;
@@ -332,69 +357,96 @@ hr {
 
 /* Agrega estilos para dispositivos móviles */
 @media screen and (max-width: 768px) {
+
   /* Ajusta el tamaño del texto */
-  h1 { font-size: 1.953rem; }
-  h2 { font-size: 1.563rem; }
-  h3 { font-size: 1.25rem; }
+  h1 {
+    font-size: 1.953rem;
+  }
+
+  h2 {
+    font-size: 1.563rem;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+  }
 
   /* Ajusta el ancho de los elementos */
-  .box { width: 100%; }
+  .box {
+    width: 100%;
+  }
 
   /* Ajusta el padding y margen de los elementos */
-  .box { padding: 20px; margin-bottom: 20px; }
+  .box {
+    padding: 20px;
+    margin-bottom: 20px;
+  }
 
   /* Ajusta el tamaño de las imágenes en los testimonios */
-  .testimonial-content img { height: 30px; }
+  .testimonial-content img {
+    height: 30px;
+  }
 
   /* Ajusta otros estilos según sea necesario */
 }
 
 /* Agrega estilos al elemento select */
 #room-type {
-  font-size: 1.5rem; /* Tamaño de la fuente */
-  padding: 10px; /* Espaciado interno */
-  border-radius: 5px; /* Bordes redondeados */
-  border: 2px solid #ccc; /* Borde */
-  width: 100%; /* Ancho completo */
-  background-color: #f8f8f8; /* Color de fondo */
-  color: #333; /* Color del texto */
+  font-size: 1.5rem;
+  /* Tamaño de la fuente */
+  padding: 10px;
+  /* Espaciado interno */
+  border-radius: 5px;
+  /* Bordes redondeados */
+  border: 2px solid #ccc;
+  /* Borde */
+  width: 100%;
+  /* Ancho completo */
+  background-color: #f8f8f8;
+  /* Color de fondo */
+  color: #333;
+  /* Color del texto */
 }
 
 /* Estilos para las opciones dentro del select */
 #room-type option {
-  font-size: 1.3rem; /* Tamaño de la fuente de las opciones */
-  padding: 10px; /* Espaciado interno */
-  background-color: #fff; /* Color de fondo */
-  color: #333; /* Color del texto */
+  font-size: 1.3rem;
+  /* Tamaño de la fuente de las opciones */
+  padding: 10px;
+  /* Espaciado interno */
+  background-color: #fff;
+  /* Color de fondo */
+  color: #333;
+  /* Color del texto */
 }
 
-.footer_{
+.footer_ {
   text-align: center;
 }
 
-.mini_bg{
+.mini_bg {
   background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.0));
 }
 
-.reservation-text{
+.reservation-text {
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
 }
 
-.reservation-text h2{
+.reservation-text h2 {
   margin: 0;
   margin-right: 2rem;
 }
 
-.login_Icon{
+.login_Icon {
   width: auto;
-  height: 2rem; 
+  height: 2rem;
 }
 
 
-.login_container{
+.login_container {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -406,24 +458,24 @@ hr {
   width: 40rem;
 }
 
-.login_container h1{
+.login_container h1 {
   text-align: center;
   padding: 0 0 2rem 0;
   border-bottom: 1px solid gray;
 }
 
-.login_container form{
+.login_container form {
   padding: 20px 40px;
   box-sizing: border-box;
 }
 
-form .correo_login{
+form .correo_login {
   position: relative;
   border-bottom: 2px solid gray;
   margin: 30px 0;
 }
 
-.correo_login input{
+.correo_login input {
   width: 100%;
   padding: 0 5px;
   height: 40px;
@@ -433,7 +485,7 @@ form .correo_login{
   outline: none;
 }
 
-.correo_login label{
+.correo_login label {
   position: absolute;
   top: 50%;
   left: 5px;
@@ -443,7 +495,7 @@ form .correo_login{
   pointer-events: none;
 }
 
-.correo_login span::before{
+/* .correo_login span::before{
   content: '';
   position: absolute;
   top: 40px;
@@ -451,63 +503,62 @@ form .correo_login{
   width: 100%;
   height: 2px;
   background-color: #6c3483;
-}
+} */
 
-.correo_login input:focus ~ label,
-.correo_login input:focus ~ label{
+.correo_login input:focus~label,
+.correo_login input:focus~label {
   top: -5px;
   color: #6c3483;
   transition: .5s;
 }
 
-.correo_login input:focus ~ span::before,
+/* .correo_login input:focus ~ span::before,
 .correo_login input:focus ~ span::before{
   width: 100%;
-}
+} */
 
-.body_login{
-  background-color: #fda94f ;
+.body_login {
+  background-color: #fda94f;
   margin: 0;
   padding: 0;
-  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   height: 100%;
   width: 100%;
 }
 
-.buton_login input[type="submit"]{
+.buton_login input[type="submit"] {
   width: 100%;
   height: 50px;
   border: none;
   font-size: 18px;
-  background-color:#fda94f;
+  background-color: #fda94f;
   border-radius: 10px;
   margin-bottom: 1rem;
   cursor: pointer;
   outline: none;
 }
 
-.buton_login input[type="submit"]:hover{
+.buton_login input[type="submit"]:hover {
   border-color: black;
   transition: .5s;
 }
 
-.registrar_login{
+.registrar_login {
   text-align: center;
 }
 
-.registrar_login a{
+.registrar_login a {
   color: #6c3483;
 }
 
-.image_login
-{
+.image_login {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 1rem;
 }
 
-.image_login img{
+.image_login img {
   width: 6rem;
   height: 6rem;
 }
@@ -518,7 +569,7 @@ form .correo_login{
   color: black;
   display: flex;
   justify-content: center;
-  flex-wrap: wrap; 
+  flex-wrap: wrap;
   align-items: center;
   font-family: 'Roboto', sans-serif;
   margin: 2rem;
@@ -527,8 +578,7 @@ form .correo_login{
   width: 38rem;
 }
 
-.divs_containers
-{
+.divs_containers {
   display: grid;
   grid-template-rows: auto;
   align-items: center;
@@ -549,16 +599,32 @@ form .correo_login{
   width: 3rem;
 }
 
-.crud_header
-{
+.crud_header {
   text-align: center;
 }
 
-.admin_altas
-{
-  max-width: 20rem;
+.admin_altas {
+  max-width: 50rem;
   margin: 0 auto;
 }
 
+.delete_container select {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
+  width: 250px;
+  height: 30px;
+  border: 1px solid #999;
+  font-size: 18px;
+  color: #1c87c9;
+  background-color: #eee;
+  border-radius: 5px;
+  box-shadow: 4px 4px #ccc;
+}
+
+.delete_container label {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 2rem;
+}
 

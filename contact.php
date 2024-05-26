@@ -2,6 +2,25 @@
 session_start();
 include("php/connection.php");
 include("php/functions.php");
+
+$options = ''; // Initialize an empty string to store the options
+
+$query = "SELECT * FROM user_packagedata";
+$result = mysqli_query($conexion, $query);
+
+if (!$result) {
+    // Handle query error
+    die("Query failed: " . mysqli_error($conexion));
+}
+
+
+$rooms_data = [];
+while ($row = mysqli_fetch_assoc($result)) {
+    $rooms_data[] = $row;
+    $options .= "<option value='{$row['pak_id']}'>{$row['pak_name']}</option>";
+}
+
+
 $user_data = check_login($conexion);
 if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['reservar'])) {
   $noHabitaciones = $_POST['habitaciones'];
@@ -22,10 +41,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['reservar'])) {
   ];
 
   $_SESSION['reservation'] = $reservationData;
-
-
-  //echo '<pre>'; print_r($reservationData); echo '</pre>';
-
 
 
   $query = "INSERT INTO `user_reservation`(`reservation_numRooms`, `reservation_typeRoom`, 
@@ -97,10 +112,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['reservar'])) {
           <div class="form-group">
             <label for="room-type">Tipo de Habitación</label>
             <select id="room-type" name="tipo_habitacion" required>
-              <option value="sencilla">Sencilla</option>
-              <option value="doble">Doble</option>
-              <option value="deluxe">Deluxe</option>
-              <option value="lunaDeMiel">Luna de Miel</option>
+                <option>-- Selecciona un paquete --</option>
+                <?php echo $options; ?>
             </select>
           </div><br>
           <div class="form-group">
