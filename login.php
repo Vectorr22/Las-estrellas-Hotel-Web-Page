@@ -2,6 +2,7 @@
 session_start();
 include("php/connection.php");
 include("php/functions.php");
+$error_message = "";
 if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['login'])) {
     $email = $_POST['user_email'];
     $password = $_POST['user_password'];
@@ -16,6 +17,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['login'])) {
                 header("Location: contact.php");
                 exit();
             }
+        }
+        else{
+            $error_message = "No existe una cuenta asociada a este correo";
         }
     }
 }
@@ -66,6 +70,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['login'])) {
                 <div id="error-message" style="color: red; margin-bottom: 10px;"></div>
                 <div class="buton_login">
                     <input type="submit" value="Login" name="login">
+                </div>
+                <div id="error-message" style="color: red; margin-bottom: 10px;">
+                    <?php if (!empty($error_message)) echo $error_message; ?>
                 </div>
                 <div class="registrar_login">
                     ¿No tienes cuenta? <a href="register.php">Registrate</a>
