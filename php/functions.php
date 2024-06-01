@@ -20,7 +20,7 @@ function check_login($conexion){
 }
 
 function get_prices($reservation_data){
-    $typeOfRoom = $reservation_data['tipo_Habitacion'];
+    $typeOfRoom = strtolower($typeOfRoom = $reservation_data['tipo_Habitacion']['pak_name']);
     $num_habitaciones = $reservation_data['noHabitaciones'];
     switch($typeOfRoom)
     {

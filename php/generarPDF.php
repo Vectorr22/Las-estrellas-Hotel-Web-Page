@@ -89,7 +89,7 @@ $pdf->Ln();
 $pdf->SetFont('Arial','',12);
 $numHabitaciones = $reservation_data['noHabitaciones'];
 $pdf->Cell(40,10,"$numHabitaciones",0,0,'L');
-$descripcion = $reservation_data['tipo_Habitacion'];
+$descripcion = $reservation_data['tipo_Habitacion']['pak_name'];
 $pdf->Cell(60,10,"Habitacion $descripcion",0,0,'L');
 $precio_noche = $prices['precio_noche'];
 $pdf->Cell(60,10,"$ $precio_noche",0,0,'L');

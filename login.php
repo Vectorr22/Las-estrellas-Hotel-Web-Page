@@ -21,8 +21,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['login'])) {
 }
 ?>
 
-
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -31,6 +29,22 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['login'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link href="css/style.css" rel="stylesheet">
+    <script type="text/javascript">
+        function validate() {
+            let emailValue = document.getElementById("email").value;
+            let email = document.getElementById("email");
+            let errorMessage = document.getElementById("error-message");
+            let re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+            if (re.test(emailValue)) {
+                errorMessage.textContent = "";
+                return true;
+            } else {
+                email.style.border = "red solid 3px";
+                errorMessage.textContent = "Por favor, introduce un correo electrónico válido.";
+                return false;
+            }
+        }
+    </script>
 </head>
 
 <body class="body_login">
@@ -40,15 +54,16 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['login'])) {
             <div class="image_login">
                 <a href="loginAdmin.php"><img src="img/user.png" alt="login_image"></a>
             </div>
-            <form method="post">
+            <form method="post" onsubmit="return validate();">
                 <div class="correo_login">
-                    <input type="text" required name="user_email">
+                    <input type="text" required name="user_email" id="email">
                     <label>Correo Electrónico</label>
                 </div>
                 <div class="correo_login">
-                    <input type="text" required name="user_password">
+                    <input type="password" required name="user_password">
                     <label>Contraseña</label>
                 </div>
+                <div id="error-message" style="color: red; margin-bottom: 10px;"></div>
                 <div class="buton_login">
                     <input type="submit" value="Login" name="login">
                 </div>
@@ -57,10 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['login'])) {
                 </div>
             </form>
         </div>
-
     </container>
-
-
 </body>
 
 </html>

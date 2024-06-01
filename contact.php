@@ -9,27 +9,30 @@ $query = "SELECT * FROM user_packagedata";
 $result = mysqli_query($conexion, $query);
 
 if (!$result) {
-    // Handle query error
-    die("Query failed: " . mysqli_error($conexion));
+  // Handle query error
+  die("Query failed: " . mysqli_error($conexion));
 }
 
 
 $rooms_data = [];
 while ($row = mysqli_fetch_assoc($result)) {
-    $rooms_data[] = $row;
-    $options .= "<option value='{$row['pak_id']}'>{$row['pak_name']}</option>";
+  $rooms_data[] = $row;
+  $options .= "<option value='{$row['pak_id']}'>{$row['pak_name']}</option>";
 }
 
 
 $user_data = check_login($conexion);
+
 if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['reservar'])) {
   $noHabitaciones = $_POST['habitaciones'];
-  $tipo_Habitacion = $_POST['tipo_habitacion'];
+  $room_id = $_POST['tipo_habitacion'];
+  $query = "SELECT pak_name from user_packagedata WHERE pak_id = $room_id";
+  $result = mysqli_query($conexion, $query);
+  $tipo_Habitacion = mysqli_fetch_assoc($result);
   $numPersonas = $_POST['numPersonas'];
   $check_in = $_POST['check_in'];
   $check_out = $_POST['check_out'];
   $id = $user_data['id'];
-
 
   $reservationData = [
     'noHabitaciones' => $noHabitaciones,
@@ -37,20 +40,27 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['reservar'])) {
     'numPersonas' => $numPersonas,
     'check_in' => $check_in,
     'check_out' => $check_out,
-    'id' => $id
+    'id' => $id,
+    'room_id' => $room_id
   ];
 
+  $prices = get_prices($reservationData);
+
   $_SESSION['reservation'] = $reservationData;
-
-
-  $query = "INSERT INTO `user_reservation`(`reservation_numRooms`, `reservation_typeRoom`, 
-  `reservation_numPeople`, `reservation_checkIn`, `reservation_checkOut`, `user_id`) 
-  VALUES ('$noHabitaciones','$tipo_Habitacion','$numPersonas','$check_in','$check_out','$id')";
-
-  header("Location: php/generarPDF.php");
-  die;
+  $_SESSION['totalPrice'] = $prices['total'];
+  $query = "INSERT INTO `user_reservation`(`reservation_numRooms`, `reservation_numPeople`, `reservation_checkIn`, `reservation_checkOut`, `user_id`, `reservation_package_id`) VALUES ('$noHabitaciones','$numPersonas','$check_in','$check_out','$id','$room_id')";
+  $result = mysqli_query($conexion, $query);
+  if($result)
+  {
+    header("Location: payment.php");
+    die;
+  }
+  else
+  {
+    echo "Error: " . mysqli_error($conexion);
+  }
+  
 }
-
 
 ?>
 
@@ -67,6 +77,85 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['reservar'])) {
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" media="screen and (max-width:768px)" href="css/mobile.css">
   <title>Hotel Las Estrellas</title>
+  <script type="text/javascript">
+    function validate() {
+        let rooms = document.getElementById("rooms");
+        let guests = document.getElementById("guests");
+        let checkInDate = document.getElementById("check-in-date");
+        let checkOutDate = document.getElementById("check-out-date");
+        let errorMessage = document.getElementById("error-message");
+        
+        let today = new Date().toISOString().split("T")[0];
+        let twoYearsFromToday = new Date();
+        twoYearsFromToday.setFullYear(twoYearsFromToday.getFullYear() + 2);
+        twoYearsFromToday = twoYearsFromToday.toISOString().split("T")[0];
+
+        errorMessage.textContent = "";
+
+        // Validate rooms
+        if (!/^[1-3]$/.test(rooms.value)) {
+            rooms.style.border = "red solid 3px";
+            errorMessage.textContent = "Número de habitaciones debe ser entre 1 y 3.";
+            return false;
+        } else {
+            rooms.style.border = "";
+        }
+
+        // Validate guests
+        if (!/^[1-9]$|^10$/.test(guests.value)) {
+            guests.style.border = "red solid 3px";
+            errorMessage.textContent = "Cantidad de personas debe ser entre 1 y 10.";
+            return false;
+        } else {
+            guests.style.border = "";
+        }
+
+        // Validate check-in date
+        if (checkInDate.value < today || checkInDate.value > twoYearsFromToday) {
+            checkInDate.style.border = "red solid 3px";
+            errorMessage.textContent = "Fecha de entrada debe ser a partir de hoy y no más de dos años en el futuro.";
+            return false;
+        } else {
+            checkInDate.style.border = "";
+        }
+
+        // Validate check-out date
+        if (checkOutDate.value <= checkInDate.value || checkOutDate.value > twoYearsFromToday) {
+            checkOutDate.style.border = "red solid 3px";
+            errorMessage.textContent = "Fecha de salida debe ser después de la fecha de entrada y no más de dos años en el futuro.";
+            return false;
+        } else {
+            checkOutDate.style.border = "";
+        }
+
+        return true;
+    }
+
+    function startTimer(duration, display) {
+        var timer = duration, minutes, seconds;
+        var interval = setInterval(function () {
+            minutes = parseInt(timer / 60, 10);
+            seconds = parseInt(timer % 60, 10);
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            display.textContent = minutes + ":" + seconds;
+
+            if (--timer < 0) {
+                clearInterval(interval);
+                alert("Tiempo de reserva expirado. Serás redirigido a la página principal.");
+                window.location.href = 'index.php';
+            }
+        }, 1000);
+    }
+
+    window.onload = function () {
+        var tenMinutes = 60 * 10,
+            display = document.querySelector('#time');
+        startTimer(tenMinutes, display);
+    };
+  </script>
 </head>
 
 <body>
@@ -79,7 +168,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['reservar'])) {
             <li><a href="index.php">Home</a></li>
             <li><a href="about.php">Acerca de</a></li>
             <li><a href="php/logout.php">Logout</a></li>
-            <!-- <li><a href="contact.php" class="current">Booking</a></li> -->
           </ul>
         </div>
       </nav>
@@ -95,30 +183,24 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['reservar'])) {
       <div class="container">
         <h1>Bienvenido <?php echo $user_data['user_name']; ?></h1>
         <h2>Reservación</h2>
+        <br>
+        <div>Tiempo restante: <span id="time">10:00</span></div>
         <br><br>
-        <form method="post">
-          <!-- <div class="form-group">
-          <label for="name">Nombre Completo</label>
-          <input type="text" id="name" name="name" required>
-        </div>
-        <div class="form-group">
-          <label for="email">Correo Electrónico</label>
-          <input type="email" id="email" name="email" required>
-        </div> -->
+        <form method="post" onsubmit="return validate();">
           <div class="form-group">
             <label for="rooms">Número de Habitaciones</label>
-            <input type="number" id="rooms" name="habitaciones" min="1" required>
+            <input type="number" id="rooms" name="habitaciones" min="1" max="3" required>
           </div>
           <div class="form-group">
             <label for="room-type">Tipo de Habitación</label>
             <select id="room-type" name="tipo_habitacion" required>
-                <option>-- Selecciona un paquete --</option>
-                <?php echo $options; ?>
+              <option>-- Selecciona un paquete --</option>
+              <?php echo $options; ?>
             </select>
           </div><br>
           <div class="form-group">
             <label for="guests">Cantidad de Personas</label>
-            <input type="number" id="guests" name="numPersonas" min="1" required>
+            <input type="number" id="guests" name="numPersonas" min="1" max="10" required>
           </div>
           <div class="form-group">
             <label for="check-in-date">Fecha de Entrada</label>
@@ -129,8 +211,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['reservar'])) {
             <input type="date" id="check-out-date" name="check_out" required>
           </div>
 
+          <div id="error-message" style="color: red; margin-bottom: 10px;"></div>
+
           <button type="submit" class="btn btn-light" name="reservar">Reservar</button>
         </form>
+        <br>
       </div>
     </section>
 
@@ -164,7 +249,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['reservar'])) {
 
     <div class="clr"></div>
     <br>
-    <section id="footer">
+    <section id="footer" class="footer_">
 
       <p>Hotel Las Estrellas &copy; 2024, All Rights Reserved </p>
     </section>
@@ -172,6 +257,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['reservar'])) {
     <footer id="mainfooter" class="py-30">
       <p>&copy; 2024 Hotel Las Estrellas</p>
     </footer>
+
+    
+
 
 </body>
 

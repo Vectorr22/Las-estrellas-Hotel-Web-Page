@@ -628,3 +628,11 @@ form .correo_login {
   font-size: 2rem;
 }
 
+.paypal-button-container
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
