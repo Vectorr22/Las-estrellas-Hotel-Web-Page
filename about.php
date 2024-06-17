@@ -21,7 +21,7 @@ if (isset($_SESSION['user_type'])) {
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" media="screen and (max-width:768px)" href="css/mobile.css">
   <title>Hotel Las Estrellas | Acerca de</title>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBJc6pEb4ZZ3uNfyTOr8kd7SNER7TrsNg&callback=initMap" async defer></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key&callback=initMap" async defer></script>
   <script>
     function initMap() {
       // The location of the hotel
